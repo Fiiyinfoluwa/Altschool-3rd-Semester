@@ -1,10 +1,3 @@
-terraform {
-  required_providers {
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-    }
-  }
-}
 
 data "kubernetes_service" "nginx-service"{
   metadata {
