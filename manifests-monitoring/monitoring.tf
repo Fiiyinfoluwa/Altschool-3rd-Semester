@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+    }
+  }
+}
+
 data "kubectl_path_documents" "docs" {
     pattern = "./*.yaml"
 }
