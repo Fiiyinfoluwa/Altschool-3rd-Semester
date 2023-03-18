@@ -1,0 +1,44 @@
+variables:
+    IMAGE_NAME: fiiyinfoluwa/portfolio
+    IMAGE_TAG: latest
+
+stages:
+    - "build"
+    - "provision"
+    - "deploy"
+
+build_image:
+    stage: build
+    image: docker:23.0.1-cli
+    services:
+        - docker:23.0.1-dind
+    variables:
+        DOCKER_TLS_CERTDIR: "/certs"
+    before_script:
+        - cd portfolio
+        - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
+    script: 
+        - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        - docker push $IMAGE_NAME:$IMAGE_TAG
+
+provision_infrastructure_deploy_manifests:
+    stage: provision 
+    image:
+      name: hashicorp/terraform:0.12.28
+      entrypoint:
+        - '/usr/bin/env'
+        - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+        - 'AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}' 
+        - 'AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
+    script: 
+        - terraform init
+        - terraform apply -auto-approve
+
+cluster:
+  stage: clean
+  rules:
+  - if: '$CLEAN_ENV != null'
+  script:
+    - terraform init 
+    - terraform destroy -auto-approve
+  when: manual
