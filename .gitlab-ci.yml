@@ -4,8 +4,8 @@ variables:
 
 stages:
     - "build"
-    - "provision"
     - "deploy"
+    - "clean"
 
 build_image:
     stage: build
@@ -22,7 +22,7 @@ build_image:
         - docker push $IMAGE_NAME:$IMAGE_TAG
 
 provision_infrastructure_deploy_manifests:
-    stage: provision 
+    stage: deploy 
     image:
       name: hashicorp/terraform:0.12.28
       entrypoint:
