@@ -36,11 +36,6 @@ resource "kubectl_manifest" "kube-deployment-prometheus-ingress" {
     depends_on = [helm_release.kube-prometheus]
 }
 
-
-data "kubectl_file_documents" "portfolio" {
-    content = file("portfolio.yaml")
-}
-
 resource "helm_release" "prometheus-nginx-exporter" {
   name       = "prometheus-nginx-exporter"
   namespace  = "monitoring"
