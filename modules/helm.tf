@@ -16,17 +16,6 @@ resource "helm_release" "nginx-ingress-controller" {
   }
 }
 
-resource "helm_release" "kube-prometheus" {
-  name       = "kube-prometheus-stack"
-  namespace  = "monitoring"
-  version    = var.kube-version
-  repository = "https://prometheus-community.github.io/helm-charts"
-  chart      = "kube-prometheus-stack"
-
-  depends_on = [resource.kubernetes_namespace.monitoring, resource.kubectl_manifest.kube-deployment-socks-ingress]
-}           
-
-
 
 resource "kubectl_manifest" "kube-deployment-prometheus-ingress" {
     for_each  = data.kubectl_file_documents.prometheus-ingress.manifests
@@ -47,5 +36,5 @@ resource "helm_release" "prometheus-nginx-exporter" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus-nginx-exporter"
 
-  depends_on = [resource.kubernetes_namespace.monitoring, resource.kubectl_manifest.kube-deployment-socks-ingress]
+  depends_on = [resource.kubernetes_namespace.monitoring, resource.kubectl_manifest.kube-deployment-portfolio-ingress]
 }
