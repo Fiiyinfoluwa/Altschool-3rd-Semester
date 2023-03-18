@@ -20,3 +20,8 @@ data "kubernetes_service" "nginx-service"{
     helm_release.nginx-ingress-controller
   ]
 }
+
+data "kubectl_file_documents" "prometheus-ingress" {
+    content = file("prometheus.yaml")
+}
+    

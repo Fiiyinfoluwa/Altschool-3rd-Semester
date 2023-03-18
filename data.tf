@@ -1,9 +1,6 @@
 
 
 
-data "kubectl_file_documents" "prometheus-ingress" {
-    content = file("prometheus.yaml")
-}
 
 data "kubectl_file_documents" "portfolio" {
     content = file("portfolio.yaml")    
