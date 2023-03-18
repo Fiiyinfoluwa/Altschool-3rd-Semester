@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+    }
+  }
+}
+
 data "aws_iam_policy_document" "kubectl_assume_role_policy" {
   statement {
     actions = [
