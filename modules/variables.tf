@@ -12,62 +12,50 @@ variable "environment" {
   default     = "stag"
 }
 
-variable "access_key" {
-  type = string
-}
-
-variable "secret_key" {
-  type = string
-}
-
 variable "region" {
   type    = string
   default = "us-east-1"
 }
 
+
 variable "vpc_cidr_block" {
   type    = string
-  default = "10.5.0.0/16"
+  default = "10.0.0.0/16"
 }
 
 variable "public_subnets" {
   type = map(any)
   default = {
     "eks-public-1" = {
-      name       = "eksPublic1"
+      name       = "eks-public-1"
       az         = "us-east-1a"
-      cidr_block = "10.5.1.0/24"
-      key        = "eksPublic1"
+      cidr_block = "10.0.1.0/24"
+      key        = "eks-public-1"
     },
 
     "eks-public-2" = {
-      name       = "eksPublic2"
+      name       = "eks-public-2"
       az         = "us-east-1b"
-      cidr_block = "10.5.2.0/24"
-      key        = "eksPublic2"
+      cidr_block = "10.0.2.0/24"
+      key        = "eks-public-2"
     }
   }
 }
-
-variable "kube-version" {
-  default = "36.2.0"
-}
-
 variable "private_subnets" {
   type = map(any)
   default = {
     "eks-private-1" = {
-      name       = "eksPrivate1"
+      name       = "eks-private-1"
       az         = "us-east-1a"
-      cidr_block = "10.5.3.0/24"
-      key        = "eksPrivate1"
+      cidr_block = "10.0.3.0/24"
+      key        = "eks-private-1"
     },
 
     "eks-private-2" = {
-      name       = "eksPrivate2"
+      name       = "eks-private-2"
       az         = "us-east-1b"
-      cidr_block = "10.5.4.0/24"
-      key        = "eksPrivate2"
+      cidr_block = "10.0.4.0/24"
+      key        = "eks-private-2"
     }
   }
 }
@@ -82,6 +70,10 @@ variable "eks_sg" {
   }
 }
 
+variable "kube-version" {
+  default = "36.2.0"
+}
+
 variable "cluster_name" {
   default = "my-cluster"
 }
@@ -93,13 +85,13 @@ variable "eks_cidr_block" {
 variable "tags" {
   type = map(any)
   default = {
-    vpc              = "vpc"
-    internet_gateway = "igw"
-    nat_gateway      = "nat-gw"
-    publicRT         = "publicRT"
-    privateRT        = "privateRT"
-    elastic_ip       = "eip"
-    sg               = "sg"
+    vpc              = "eks-vpc"
+    internet_gateway = "eks-igw"
+    nat_gateway      = "eks-nat-gw"
+    publicRT         = "eks-publicRT"
+    privateRT        = "eks-privateRT"
+    elastic_ip       = "eks-eip"
+    sg               = "eks_sg"
   }
 }
 
