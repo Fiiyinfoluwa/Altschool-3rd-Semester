@@ -1,10 +1,3 @@
-terraform {
-  required_providers {
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-    }
-  }
-}
 
 # Create kubernetes Name space for socks shop app
 
