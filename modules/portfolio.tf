@@ -14,8 +14,8 @@ resource "kubectl_manifest" "kube-deployment-portfolio" {
 }
 
 
-resource "kubectl_manifest" "kube-deployment-socks-ingress" {
-    for_each  = data.kubectl_file_documents.ingress.manifests
+resource "kubectl_manifest" "kube-deployment-portfolio-ingress" {
+    for_each  = data.kubectl_file_documents.portfolio-ingress.manifests
     yaml_body = each.value
 
     depends_on = [kubectl_manifest.kube-deployment-socks, helm_release.nginx-ingress-controller]
