@@ -1,5 +1,5 @@
 data "aws_eks_cluster" "eks-cluster" {
-  name = "altschool-exam-eks-cluster"
+  name = var.cluster_name
 
   depends_on = [
     aws_eks_cluster.eks_cluster
