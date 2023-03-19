@@ -9,12 +9,12 @@ spec:
   ingressClassName: nginx
   rules:
   # Use the host you used in your kubernetes Ingress Configurations
-  - host: monitoring.fiiyinfoluwa.live
+  - host: prometheus.fiiyinfoluwa.live
     http:
       paths:
       - backend:
           service:
-            name: grafana
+            name: prometheus-grafana
             port:
               number: 80
         path: /

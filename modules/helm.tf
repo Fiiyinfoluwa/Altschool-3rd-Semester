@@ -45,3 +45,13 @@ resource "helm_release" "prometheus-nginx-exporter" {
 
   depends_on = [resource.kubernetes_namespace.monitoring]
 }
+
+resource "helm_release" "grafana-loki" {
+  name       = "kube-prometheus-stack"
+  namespace  = "monitoring"
+  version    = var.kube-version
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "loki-stack"
+
+  depends_on = [resource.kubernetes_namespace.monitoring]
+}
