@@ -1,11 +1,11 @@
-terraform {
-	backend "remote" {
-		organization = "fiiyinfoluwa"
-		workspaces {
-			name = "exam-cluster1" 
-		}
-	}
-}
+#terraform {
+#	backend "remote" {
+#		organization = "fiiyinfoluwa"
+#		workspaces {
+#			name = "exam-cluster1" 
+#		}
+#	}
+#}
 
 terraform {
   required_providers {
