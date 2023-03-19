@@ -14,7 +14,7 @@
 
 ### Portfolio App
 
-![Portfolio](./Images/portfolio.PNG)
+![Portfolio](./Images/Portfolio.PNG)
 
 ### Grafana Dashboard
 
