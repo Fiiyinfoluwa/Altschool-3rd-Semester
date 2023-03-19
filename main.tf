@@ -17,7 +17,6 @@ module "provison-deploy" {
 module "monitoring" {
     source = "./manifests-monitoring"
 
-    depends_on = [module.provison-deploy]
 }
 
 terraform {
