@@ -18,3 +18,14 @@ output "endpoint" {
   value = aws_eks_cluster.eks_cluster.endpoint
 }
 
+output "cluster_name" {
+  description = "The name of the EKS cluster."
+  value       = aws_eks_cluster.eks_cluster.name
+}
+
+output "cluster_certificate_authority_data" {
+  description = "The base64 encoded certificate data required to communicate with your cluster."
+  value       = aws_eks_cluster.eks_cluster.certificate_authority[0].data
+}
+
+
