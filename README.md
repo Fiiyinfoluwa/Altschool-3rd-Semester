@@ -22,6 +22,8 @@
 
 ### Pipeline
 
+Pipeline Trigger: Git Push
+
 Stage: Build
 Build stage is used to build the docker images for the microservices and portfolio app.
 
