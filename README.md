@@ -18,4 +18,4 @@ Deploy stage is used to provision Kubernetes Infrastructure and deploy the micro
 
 Stage: Clean stage is used to destroy the Kubernetes Infrastructure.
 
-
+#### ./sockshop-servicepoint Folder

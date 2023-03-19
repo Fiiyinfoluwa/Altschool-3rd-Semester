@@ -2,8 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sockshop
+  annotations:
+  cert-manager.io/cluster-issuer: "letsencrypt-staging"
   namespace: sock-shop
 spec:
+  tls:
+  - hosts:
+    - sockshop.fiiyinfoluwa.live
+    secretName: sockshop-tls
   ingressClassName: nginx
   rules:
       -  host: sockshop.fiiyinfoluwa.live
