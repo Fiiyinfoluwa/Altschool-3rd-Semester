@@ -43,5 +43,5 @@ resource "helm_release" "prometheus-nginx-exporter" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus-nginx-exporter"
 
-  depends_on = [resource.kubernetes_namespace.monitoring, resource.kubectl_manifest.kube-deployment-portfolio-ingress]
+  depends_on = [resource.kubernetes_namespace.monitoring]
 }
