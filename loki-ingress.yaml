@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prometheus-ui
+  name: grafana-ui
   namespace: monitoring
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -9,12 +9,12 @@ spec:
   ingressClassName: nginx
   rules:
   # Use the host you used in your kubernetes Ingress Configurations
-  - host: prometheus.fiiyinfoluwa.live
+  - host: loki.fiiyinfoluwa.live
     http:
       paths:
       - backend:
           service:
-            name: kube-prometheus-grafana
+            name: kube-prometheus-stack-loki
             port:
               number: 80
         path: /
