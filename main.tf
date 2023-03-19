@@ -40,11 +40,6 @@ provider "aws" {
     region     = "us-east-1"
 }
 
-module "provison-deploy" {
-    source = "./modules"
-}
-
-
 data "kubectl_path_documents" "service-monitor" {
     pattern = "./sockshop-servicemonitor/*.yaml"
 }
@@ -53,6 +48,13 @@ resource "kubectl_manifest" "service-monitor" {
     for_each  = toset(data.kubectl_path_documents.service-monitor.documents)
     yaml_body = each.value
 }
+
+module "provison-deploy" {
+    source = "./modules"
+}
+
+
+
 
 
 
