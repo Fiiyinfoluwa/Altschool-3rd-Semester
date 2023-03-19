@@ -25,8 +25,13 @@
 Stage: Build
 Build stage is used to build the docker images for the microservices and portfolio app.
 
+![Build](./Images/build.PNG)
+
 Stage: Provision and Deploy
+
 Deploy stage is used to provision Kubernetes Infrastructure and deploy the microservices and portfolio app on Kubernetes.
+
+![Build](./Images/cluster%20provision.PNG) 
 
 Stage: Clean stage is used to destroy the Kubernetes Infrastructure.
 
