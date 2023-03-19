@@ -39,7 +39,7 @@ resource "kubectl_manifest" "kube-deployment-prometheus-ingress" {
 resource "helm_release" "prometheus-nginx-exporter" {
   name       = "prometheus-nginx-exporter"
   namespace  = "monitoring"
-  version    = "0.1.o"
+  version    = "0.1.0"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus-nginx-exporter"
 
