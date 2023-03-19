@@ -50,7 +50,7 @@ resource "helm_release" "grafana-loki" {
   name       = "kube-prometheus-stack"
   namespace  = "monitoring"
   repository = "https://grafana.github.io/helm-charts"
-  chart      = "loki-stack"
+  chart      = "grafana/loki-stack"
 
   depends_on = [resource.kubernetes_namespace.monitoring]
 }

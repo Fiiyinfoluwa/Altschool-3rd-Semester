@@ -1,3 +1,12 @@
+terraform {
+	backend "remote" {
+		organization = "fiiyinfoluwa"
+		workspaces {
+			name = "exam-cluster1-ssl" 
+		}
+	}
+}
+
 resource "kubectl_manifest" "cert_manager" {
   manifest = curl("https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.yaml")
 
