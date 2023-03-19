@@ -14,11 +14,11 @@ provider "kubectl" {
 }
 
 data "aws_eks_cluster_auth" "cluster-auth" {
-  name = "my-cluster"
+  name = "altschool-exam-eks-cluster"
 }
 
 data "aws_eks_cluster" "eks_cluster" {
-  name = "my-cluster"
+  name = "altschool-exam-eks-cluster"
 }
 
 data "kubectl_path_documents" "docs" {
