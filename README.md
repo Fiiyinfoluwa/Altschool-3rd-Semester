@@ -8,6 +8,18 @@
 - Terraform
 - GitLab account
 
+### SockShop Microservices App
+
+![SockShop](./Images/sock-shop.PNG)
+
+### Portfolio App
+
+![Portfolio](./Images/portfolio.PNG)
+
+### Grafana Dashboard
+
+![Grafana](./Images/prometheus-ui.PNG)
+
 ### Pipeline
 
 Stage: Build
@@ -19,3 +31,17 @@ Deploy stage is used to provision Kubernetes Infrastructure and deploy the micro
 Stage: Clean stage is used to destroy the Kubernetes Infrastructure.
 
 #### ./sockshop-servicepoint Folder
+
+This folder conntains microservices servicepoint files for the sockshop app.
+
+#### ./modules Folder
+
+This folder contains the terraform modules for the Terraform provision.
+
+#### ./Let's Encrypyt Folder
+
+This folder contains the terraform files for the Let's Encrypt provision.
+
+#### ./portfolio Folder
+
+This folder contains the portfolio app files and dockerfile.
