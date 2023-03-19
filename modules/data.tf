@@ -22,7 +22,7 @@ data "kubernetes_service" "nginx-service"{
 }
 
 data "kubectl_file_documents" "prometheus-ingress" {
-    content = file("prometheus.yaml")
+    content = file("prometheus-ingress.yaml")
 }
 
 data "kubectl_file_documents" "portfolio" {
@@ -33,11 +33,15 @@ data "kubectl_file_documents" "portfolio-ingress" {
     content = file("portfolio-ingress.yaml")
 }
 
-data "kubectl_file_documents" "docs" {
+data "kubectl_file_documents" "sockshop" {
     content = file("microservices.yaml")    
 }
 
-data "kubectl_file_documents" "ingress" {
+data "kubectl_file_documents" "sockshop-ingress" {
     content = file("sockshop-ingress.yaml")
+}
+
+data "kubectl_file_documents" "loki-ingress" {
+    content = file("loki-ingress.yaml")
 }
 

@@ -1,10 +1,4 @@
 
-resource "kubernetes_namespace" "monitoring" {
-  metadata {
-    name = "monitoring"
-  }
-}
-
 resource "helm_release" "kube-prometheus" {
   name       = "kube-prometheus"
   namespace  = "monitoring"
@@ -36,15 +30,15 @@ resource "kubectl_manifest" "kube-deployment-prometheus-ingress" {
     depends_on = [helm_release.kube-prometheus]
 }
 
-# resource "helm_release" "prometheus-nginx-exporter" {
-#   name       = "prometheus-nginx-exporter"
-#   namespace  = "monitoring"
-#   version    = "0.1.0"
-#   repository = "https://prometheus-community.github.io/helm-charts"
-#   chart      = "prometheus-nginx-exporter"
+resource "helm_release" "prometheus-nginx-exporter" {
+  name       = "prometheus-nginx-exporter"
+  namespace  = "monitoring"
+  version    = "0.1.0"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "prometheus-nginx-exporter"
 
-#   depends_on = [resource.kubernetes_namespace.monitoring]
-# }
+  depends_on = [resource.kubernetes_namespace.monitoring]
+}
 
 resource "helm_release" "grafana-loki" {
   name       = "kube-prometheus-stack"
@@ -53,4 +47,11 @@ resource "helm_release" "grafana-loki" {
   chart      = "loki-stack"
 
   depends_on = [resource.kubernetes_namespace.monitoring]
+}
+
+resource "kubectl_manifest" "kube-deployment-loki-ingress" {
+    for_each  = data.kubectl_file_documents.loki-ingress.manifests
+    yaml_body = each.value
+
+    depends_on = [helm_release.grafana-loki]
 }

@@ -7,26 +7,6 @@ terraform {
 	}
 }
 
-
-module "provison-deploy" {
-    access_key = var.access_key
-    secret_key = var.secret_key
-    source = "./modules"
-}
-
-# data "kubectl_path_documents" "docs" {
-#     pattern = "./manifests-monitoring/*.yaml"
-
-#     depends_on = [
-#         module.provison-deploy
-#     ]
-# }
-
-# resource "kubectl_manifest" "monitoring" {
-#     for_each  = toset(data.kubectl_path_documents.docs.documents)
-#     yaml_body = each.value
-# }
-
 terraform {
   required_providers {
     kubectl = {
@@ -54,11 +34,38 @@ terraform {
   }
 }
 
-
 provider "aws" {
     access_key = var.access_key
     secret_key = var.secret_key
     region     = "us-east-1"
 }
+
+module "provison-deploy" {
+    access_key = var.access_key
+    secret_key = var.secret_key
+    source = "./modules"
+}
+
+resource "kubernetes_namespace" "monitoring" {
+  metadata {
+    name = "monitoring"
+  }
+
+  depends_on = [module.provison-deploy]
+}
+
+data "kubectl_path_documents" "service-monitor" {
+    pattern = "./sockshop-servicemonitor/*.yaml"
+
+  depends_on kubernetes_namespace.monitoring 
+}
+
+resource "kubectl_manifest" "service-monitor" {
+    for_each  = toset(data.kubectl_path_documents.docs.documents)
+    yaml_body = each.value
+}
+
+
+
 
 
