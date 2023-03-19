@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portfolio-ingress
+  annotations:
+  cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  namespace: portfolio
+spec:
+  tls:
+  - hosts:
+    - portfolio.fiiyinfoluwa.live
+    secretName: ssl
+  ingressClassName: nginx
+  rules:
+      -  host: portfolio.fiiyinfoluwa.live
+         http:
+          paths:
+          - backend:
+              service:
+                name: kube-prometheus-grafana
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

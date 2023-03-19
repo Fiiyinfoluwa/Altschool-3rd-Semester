@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - sockshop.fiiyinfoluwa.live
-    secretName: sockshop-tls
+    secretName: ssl
   ingressClassName: nginx
   rules:
       -  host: sockshop.fiiyinfoluwa.live
