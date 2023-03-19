@@ -14,11 +14,11 @@ provider "kubectl" {
 }
 
 data "aws_eks_cluster_auth" "cluster-auth" {
-  name = var.cluster_name
+  name = "my-cluster"
 }
 
 data "aws_eks_cluster" "eks_cluster" {
-  name = var.cluster_name
+  name = "my-cluster"
 }
 
 data "kubectl_path_documents" "docs" {
