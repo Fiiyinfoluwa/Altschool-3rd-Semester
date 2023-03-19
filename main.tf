@@ -57,7 +57,7 @@ resource "kubernetes_namespace" "monitoring" {
 data "kubectl_path_documents" "service-monitor" {
     pattern = "./sockshop-servicemonitor/*.yaml"
 
-  depends_on kubernetes_namespace.monitoring 
+  depends_on = [kubernetes_namespace.monitoring]
 }
 
 resource "kubectl_manifest" "service-monitor" {
