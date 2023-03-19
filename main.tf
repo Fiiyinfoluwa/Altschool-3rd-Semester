@@ -41,27 +41,16 @@ provider "aws" {
 }
 
 module "provison-deploy" {
-    access_key = var.access_key
-    secret_key = var.secret_key
     source = "./modules"
 }
 
-resource "kubernetes_namespace" "monitoring" {
-  metadata {
-    name = "monitoring"
-  }
-
-  depends_on = [module.provison-deploy]
-}
 
 data "kubectl_path_documents" "service-monitor" {
     pattern = "./sockshop-servicemonitor/*.yaml"
-
-  depends_on = [kubernetes_namespace.monitoring]
 }
 
 resource "kubectl_manifest" "service-monitor" {
-    for_each  = toset(data.kubectl_path_documents.docs.documents)
+    for_each  = toset(data.kubectl_path_documents.service-monitor.documents)
     yaml_body = each.value
 }
 

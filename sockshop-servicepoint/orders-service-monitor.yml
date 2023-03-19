@@ -2,7 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: orders-monitoring
-  namespace: sock-shop
   labels:
     release: prometheus 
 spec:
