@@ -7,8 +7,8 @@ terraform {
 }
 
 provider "kubectl" {
-  host                   = data.terraform_remote_state.eks.outputs.endpoint
-  cluster_ca_certificate = base64decode(data.terraform_remote_state.eks.outputs.certificate_authority_data)
+  host                   = data.terraform_remote_state.eks.output.endpoint
+  cluster_ca_certificate = base64decode(data.terraform_remote_state.eks.output.certificate_authority_data)
   token                  = data.aws_eks_cluster_auth.cluster-auth.token
   load_config_file       = false
 }
@@ -25,6 +25,8 @@ data "terraform_remote_state" "eks" {
 }
 data "aws_eks_cluster_auth" "cluster-auth" {
   name = "my-cluster"
+
+  depends_on = [data.terraform_remote_state.eks]
 }
 
 data "aws_eks_cluster" "eks_cluster" {
